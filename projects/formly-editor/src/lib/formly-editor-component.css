@@ -1,0 +1,129 @@
+div {
+    margin-bottom: 10px;
+}
+
+/*
+label {
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.025rem;
+    font-style: normal;
+    text-transform: uppercase;
+    color: #585152;
+    padding-right: 10px;
+}
+
+input {
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 0px;
+    box-shadow: 0px 0px 5px rgba(66, 66, 66, .75);
+    text-shadow: 0px 0px 5px rgba(66, 66, 66, .75);
+}
+
+input:focus {
+    outline: none;
+}
+*/
+
+
+.editor{
+    flex:2;
+}
+.fields{
+    flex:1;
+    margin-right: 10px;
+    border: 1px solid;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.container{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 95%;
+}
+@media (max-width: 560px) {
+    .container{
+        flex-direction: column-reverse;
+    }
+}
+.select {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.select select {
+    font-family: 'Arial';
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    outline: 0;
+    border: 0px solid #000000;
+    border-radius: 0px;
+    background: #e6e6e6;
+    color: #7b7b7b;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select select::-ms-expand {
+    display: none;
+}
+
+.select select:hover,
+.select select:focus {
+    color: #000000;
+    background: #cccccc;
+}
+
+.select select:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.select_arrow {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    pointer-events: none;
+    border-style: solid;
+    border-width: 8px 5px 0px 5px;
+    border-color: #7b7b7b transparent transparent transparent;
+}
+
+.select select:hover ~ .select_arrow,
+.select select:focus ~ .select_arrow {
+    border-top-color: #000000;
+}
+
+.select select:disabled ~ .select_arrow {
+    border-top-color: #cccccc;
+}
+.pairRow{
+    background: gainsboro;
+}
+.formlyForm{
+    height: 100%;
+}
+fieldset:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+.delete-option{
+    color: red;
+    cursor: pointer;
+}
+
+

@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="editor">
+        <fieldset [disabled]="disabled">
+            <h2>Editor</h2>
+            <div style="display: flex">
+                <div style="flex:1">
+                    <label>Identificador: </label>
+                    <input id="controlKey" [(ngModel)]="control.key"/>
+
+                </div>
+                <div style="flex:1">
+                    <label>Etiqueta: </label>
+                    <input id="controlLabel" [(ngModel)]="control.props.label"/>
+                </div>
+            </div>
+            <div>
+                <label>Requerido:</label>
+                <select class="select" [(ngModel)]="control.props.required">
+                    <option value=true>Si</option>
+                    <option value=false>No</option>
+                </select>
+            </div>
+            <div>
+                <label>Tipo: </label>
+                <select class="select" [(ngModel)]="control.type">
+                    <option value="input">Cuadro texto</option>
+                    <option value="checkbox">Check</option>
+                    <option value="textarea">Área de texto</option>
+                    <option value="radio">Opciones</option>
+                    <option value="select">Selección</option>
+                </select>
+
+                <div *ngIf="control.type==='radio' || control.type==='select'" id="opciones" style="display: flex; flex-wrap: wrap">
+                    <div style="flex:1">
+                        <label>
+                            Valor de la opción</label>
+                        <input [(ngModel)]="optionValue"/>
+                    </div>
+                    <div style="flex:1">
+                        <label>
+                            Etiqueta de la opción</label>
+                        <input [(ngModel)]="optionLabel"/>
+                    </div>
+                    <div>
+                        <button class="btAdd" (click)="addOption()">+</button>
+                    </div>
+                </div>
+                <div *ngIf="optionList.length>0">
+                    Opciones
+                    <ul>
+                        <li *ngFor="let i of optionList; let in=index">
+                            Valor: {{i.value}} - Etiqueta: {{i.label}}
+                            <span><strong class="delete-option" (click)="removeOption(in)"> X</strong></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </fieldset>
+        <div style="display: flex; margin-top: 10px">
+            <button style="flex:1; margin-right: 10px" class="btNew" [disabled]="!disabled" (click)="newComponent()">
+                Nuevo
+            </button>
+            <button style="flex:1" [disabled]="disabled || control.key==='' || control.props.label===''"
+                    class="btSaveControl" (click)="addControl()">Añadir al formulario
+            </button>
+        </div>
+        <div style="display:flex">
+            <button style="flex:1" class="btSaveForm" [disabled]="!disabled" (click)="_saveForm()">Guardar Formulario</button>
+        </div>
+        <div style="border: 1px solid #222222"></div>
+        <div class="formlyForm">
+            <h2>Previsualización:</h2>
+
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <formly-form
+                        [(model)]="formlyEditorService.model"
+                        [fields]="formlyEditorService.fields"
+                        [form]="form"
+                >
+                </formly-form>
+            </form>
+
+            <div>
+                <button type="submit" id="saveModel">Enviar</button>
+                <button id="resetModel" (click)="resetModel()">Borrar</button>
+            </div>
+        </div>
+    </div>
+    <div class="fields">
+        <!--<p>{{fieldsJson()}}</p>-->
+        <h2>Campos</h2>
+        <div class="controlItemEdit" [ngClass]="{'pairRow': i%2===0}"
+             *ngFor="let f of formlyEditorService.fields; index as i;">
+            <p>
+                Identificador: {{f.key}} <br/>
+                Tipo: {{f.type}} <br/>
+                Etiqueta: {{f.props?.label}}<br/>
+                Requerido: {{f.props?.required ? f.props?.required : false}}<br/>
+            </p>
+            <div style="display:flex">
+                <button class="btEditControl" style="width: 100%; margin-right: 5px" (click)="edit(f.key)">Editar
+                </button>
+                <button class="btDeleteControl" style="width: 100%" (click)="remove(f.key)">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
